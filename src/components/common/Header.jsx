@@ -19,7 +19,7 @@ const Header = () => {
       <div className="w-full max-w-[1440px] mx-auto">
         <div className="flex justify-between items-center py-2.5 lg:py-3.5">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center md:ml-0 ml-3">
             <div className="w-[40px] h-[40px] sm:w-[48px] sm:h-[48px] lg:w-[54px] lg:h-[54px] border-2 lg:border-[3px] border-white rounded-full lg:rounded-[26px] flex items-center justify-center">
               <img
                 src="/images/img_shape_2_1.png"
@@ -86,53 +86,31 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
+        {/* Mobile Navigation */}
         <nav
-          className={`lg:hidden ${menuOpen ? 'block' : 'hidden'} pb-4 border-t border-border-primary mt-4 pt-4`}
+          className={`lg:hidden ${menuOpen ? 'block' : 'hidden'} mt-4 pt-4 pb-4 border-t border-gray-600 bg-gray-900/95 backdrop-blur-sm rounded-md`}
         >
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-4 px-6">
             {menuItems.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
-                className={`text-sm font-medium leading-normal capitalize transition-colors duration-200 hover:text-primary-background ${
-                  item.active ? 'text-primary-background' : 'text-secondary-foreground'
+                className={`text-base font-medium leading-normal capitalize transition-colors duration-200 hover:text-primary-background ${
+                  item.active ? 'text-primary-background' : 'text-gray-300'
                 }`}
                 style={{ fontFamily: 'Saira' }}
                 onClick={() => setMenuOpen(false)}
-                layout_width="auto"
-                padding="0"
-                position="static"
-                margin="0"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/blogs"
-              className="text-sm font-medium leading-normal capitalize text-secondary-foreground hover:text-primary-background transition-colors duration-200"
-              style={{ fontFamily: 'Saira' }}
-              onClick={() => setMenuOpen(false)}
-              layout_width="auto"
-              padding="0"
-              position="static"
-              margin="0"
-            >
-              Blogs
-            </Link>
-            <div className="pt-4">
+
+            <div className="pt-2">
               <Button
                 text="Contact Us"
                 className="w-full px-6 py-2 text-sm font-bold leading-tight text-primary-background border border-primary-background rounded-sm shadow-[2px_4px_8px_#4169e1] bg-transparent hover:bg-primary-background hover:text-white transition-all duration-200"
                 style={{ fontFamily: 'Lato' }}
                 onClick={() => setMenuOpen(false)}
-                fill_background_color="transparent"
-                layout_width="100%"
-                padding="0"
-                position="static"
-                margin="0"
-                layout_gap="0"
-                variant="outline"
-                size="medium"
               />
             </div>
           </div>

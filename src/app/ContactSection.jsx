@@ -11,275 +11,213 @@ const ContactSection = () => {
     phone: '',
     whatsapp: '',
     message: '',
-    agreeToSMS: false
-  })
+    agreeToSMS: false,
+  });
+
+  const [openStep, setOpenStep] = useState(0); // default Step 01 open
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
-    }))
-  }
+      [field]: value,
+    }));
+  };
+
+  const handleCheckboxChange = () => {
+    setFormData((prev) => ({
+      ...prev,
+      agreeToSMS: !prev.agreeToSMS,
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission
-  }
+    e.preventDefault();
+    console.log(formData);
+    // TODO: connect API
+  };
+
+  const steps = [
+    {
+      step: 'Step 01',
+      text: 'Write to us by filling the form with your query and contact details. 💡',
+    },
+    {
+      step: 'Step 02',
+      text: 'Our team will review your request and get back to you with the best solution. 📞',
+    },
+    {
+      step: 'Step 03',
+      text: 'We’ll set up a free consultation and start transforming your business. 🚀',
+    },
+  ];
 
   return (
     <section className="w-full mt-16 lg:mt-[106px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-[48px]">
-          {/* Left Content */}
+          {/* Left Section */}
           <div className="w-full lg:w-[42%]">
-            <h2 
-              className="text-[40px] lg:text-[62px] font-bold leading-tight lg:leading-[92px] text-left text-[#d9d9d9] mb-2 lg:mb-[6px]"
+            <h2
+              className="text-[36px] md:text-[48px] lg:text-[62px] font-bold text-[#d9d9d9] mb-4"
               style={{ fontFamily: 'Oswald' }}
             >
               Contact
             </h2>
-            
-            <p 
-              className="text-[15px] lg:text-[17px] font-normal leading-relaxed lg:leading-[28px] text-left text-[#cccccc] mb-6 lg:mb-[30px]"
+            <p
+              className="text-[15px] md:text-[16px] lg:text-[18px] text-[#cccccc] leading-relaxed mb-6"
               style={{ fontFamily: 'Lato' }}
             >
-              We're here to answer your questions and help determine which<br />
-              of our services best fits your needs.
+              We're here to answer your questions and help determine which of our services best fits
+              your needs.
             </p>
 
-            <div className="border border-[#4169e1] p-2 lg:p-[10px] inline-flex items-center gap-2 mb-4 lg:mb-[16px]">
-              <span 
-                className="text-[16px] lg:text-[18px] font-medium leading-normal lg:leading-[22px] text-left text-[#4169e1]"
+            <div className="border border-[#4169e1] px-4 py-2 inline-flex items-center gap-2 mb-6">
+              <span
+                className="text-[16px] md:text-[18px] font-medium text-[#4169e1]"
                 style={{ fontFamily: 'Lato' }}
               >
                 Call Us Now:
               </span>
-              <span 
-                className="text-[16px] lg:text-[18px] font-medium leading-normal lg:leading-[22px] text-left text-[#d9d9d9]"
+              <span
+                className="text-[16px] md:text-[18px] font-medium text-[#d9d9d9]"
                 style={{ fontFamily: 'Lato' }}
               >
                 +91 6386174003
               </span>
             </div>
 
-            {/* Steps */}
-            <div className="space-y-4 lg:space-y-[22px]">
-              <div className="border-t border-[#ffffff0c] pt-4 lg:pt-[16px] pb-4 lg:pb-[16px] px-4 lg:px-[20px]">
-                <div className="flex justify-between items-end mb-4 lg:mb-[26px]">
-                  <span 
-                    className="text-[18px] lg:text-[20px] font-semibold leading-relaxed lg:leading-[24px] text-left capitalize text-[#4169e1]"
-                    style={{ fontFamily: 'Lato' }}
-                  >
-                    Step 01
-                  </span>
-                  <img 
-                    src="/images/img_icon.svg" 
-                    alt="Step 1"
-                    className="w-4 lg:w-[20px] h-4 lg:h-[20px]"
-                  />
-                </div>
-                <p 
-                  className="text-[14px] lg:text-[16px] font-normal leading-relaxed lg:leading-[30px] text-left text-[#cccccc]"
-                  style={{ fontFamily: 'Lato' }}
-                >
-                  Write to us by filling the form with your query and contact<br />
-                  details. 💡
-                </p>
-              </div>
+            {/* Accordion Steps */}
+            <div className="space-y-6">
+              {steps.map((s, i) => (
+                <div key={i} className="border-t border-[#ffffff0c] pt-4 px-2 sm:px-4">
+                  <div className="flex justify-between items-center mb-3">
+                    <span
+                      className={`text-[16px] md:text-[18px] font-semibold cursor-pointer ${
+                        openStep === i ? 'text-[#4169e1]' : 'text-[#d9d9d9]'
+                      }`}
+                      style={{ fontFamily: 'Lato' }}
+                      onClick={() => setOpenStep(openStep === i ? null : i)}
+                    >
+                      {s.step}
+                    </span>
+                    <button onClick={() => setOpenStep(openStep === i ? null : i)}>
+                      <img
+                        src={
+                          openStep === i
+                            ? '/images/img_icon.svg' // minus/active icon
+                            : '/images/img_icon_white_a700.svg' // plus/inactive icon
+                        }
+                        alt={s.step}
+                        className="w-4 h-4 md:w-5 md:h-5"
+                      />
+                    </button>
+                  </div>
 
-              <div className="border-t border-[#ffffff0c] pt-4 lg:pt-[16px] pb-4 lg:pb-[16px] px-4 lg:px-[20px]">
-                <div className="flex justify-between items-end">
-                  <span 
-                    className="text-[18px] lg:text-[20px] font-semibold leading-relaxed lg:leading-[24px] text-left capitalize text-[#d9d9d9]"
-                    style={{ fontFamily: 'Lato' }}
-                  >
-                    Step 02
-                  </span>
-                  <img 
-                    src="/images/img_icon_white_a700.svg" 
-                    alt="Step 2"
-                    className="w-4 lg:w-[20px] h-4 lg:h-[20px]"
-                  />
+                  {openStep === i && (
+                    <p
+                      className="text-[14px] md:text-[15px] text-[#cccccc] leading-relaxed transition-all duration-300"
+                      style={{ fontFamily: 'Lato' }}
+                    >
+                      {s.text}
+                    </p>
+                  )}
                 </div>
-              </div>
-
-              <div className="border-t border-[#ffffff0c] pt-4 lg:pt-[16px] pb-4 lg:pb-[16px] px-4 lg:px-[20px]">
-                <div className="flex justify-between items-start">
-                  <span 
-                    className="text-[18px] lg:text-[20px] font-semibold leading-relaxed lg:leading-[24px] text-left capitalize text-[#d9d9d9]"
-                    style={{ fontFamily: 'Lato' }}
-                  >
-                    Step 03
-                  </span>
-                  <img 
-                    src="/images/img_icon_white_a700.svg" 
-                    alt="Step 3"
-                    className="w-4 lg:w-[20px] h-4 lg:h-[20px]"
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Content - Contact Form */}
+          {/* Right Section (Form) */}
           <div className="w-full lg:w-[58%]">
-            <div className="bg-[#1b1e22] rounded-lg p-6 lg:p-[20px]">
-              <h3 
-                className="text-[24px] lg:text-[28px] font-medium leading-tight lg:leading-[31px] text-center text-[#d9d9d9] mb-8 lg:mb-[40px]"
+            <div className="bg-[#1b1e22] rounded-lg p-6 md:p-8 lg:p-10">
+              <h3
+                className="text-[22px] md:text-[24px] lg:text-[28px] font-medium text-center text-[#d9d9d9] mb-8"
                 style={{ fontFamily: 'Oswald' }}
               >
                 Make a Free Consulting
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-[20px] px-4 lg:px-[44px] pb-8 lg:pb-[40px]">
-                {/* Name and Email Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-[20px]">
+              <form onSubmit={handleSubmit} className="space-y-6 px-2 sm:px-6 md:px-8">
+                {/* Row 1 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label 
-                      className="block text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#d9d9d9] mb-2 lg:mb-[8px]"
-                      style={{ fontFamily: 'Lato' }}
-                    >
-                      Full Name *
-                    </label>
+                    <label className="text-sm text-[#d9d9d9] mb-2 block">Full Name *</label>
                     <EditText
                       placeholder="Enter your name"
                       value={formData.fullName}
                       onChange={(e) => handleInputChange('fullName', e.target.value)}
-                      className="w-full px-3 lg:px-[12px] py-2 lg:py-[12px] text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#ffffff66] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
-                      style={{ fontFamily: 'Lato' }}
+                      className="w-full px-3 py-2 text-sm text-[#ffffffcc] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
                     />
                   </div>
                   <div>
-                    <label 
-                      className="block text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#d9d9d9] mb-2 lg:mb-[8px]"
-                      style={{ fontFamily: 'Lato' }}
-                    >
-                      Email Address *
-                    </label>
+                    <label className="text-sm text-[#d9d9d9] mb-2 block">Email Address *</label>
                     <EditText
                       type="email"
                       placeholder="Enter your email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full px-3 lg:px-[12px] py-2 lg:py-[12px] text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#ffffff66] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
-                      style={{ fontFamily: 'Lato' }}
+                      className="w-full px-3 py-2 text-sm text-[#ffffffcc] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
                     />
                   </div>
                 </div>
 
-                {/* Phone Numbers Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-[20px]">
+                {/* Row 2 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label 
-                      className="block text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#d9d9d9] mb-2 lg:mb-[8px]"
-                      style={{ fontFamily: 'Lato' }}
-                    >
-                      Phone Number
-                    </label>
-                    <div className="flex border border-[#a6a6a633] rounded-sm bg-[#ffffff05]">
-                      <div className="flex items-center px-2 lg:px-[8px] py-3 lg:py-[18px] border-r border-[#a6a6a633] bg-[#ffffff05]">
-                        <img 
-                          src="/images/img_background.png" 
-                          alt="India flag"
-                          className="w-3 lg:w-[16px] h-2 lg:h-[10px] mr-2"
-                        />
-                        <span 
-                          className="text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#dddddd]"
-                          style={{ fontFamily: 'Lato' }}
-                        >
-                          +91
-                        </span>
-                      </div>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="flex-1 px-3 lg:px-[10px] py-3 lg:py-[18px] text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#dddddd] bg-transparent border-0 focus:outline-none"
-                        style={{ fontFamily: 'Lato' }}
-                      />
-                    </div>
+                    <label className="text-sm text-[#d9d9d9] mb-2 block">Phone Number</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      className="w-full px-3 py-2 text-sm text-[#ffffffcc] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
+                    />
                   </div>
                   <div>
-                    <label 
-                      className="block text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#d9d9d9] mb-2 lg:mb-[6px]"
-                      style={{ fontFamily: 'Lato' }}
-                    >
-                      WhatsApp Number
-                    </label>
-                    <div className="flex border border-[#a6a6a633] rounded-sm bg-[#ffffff05]">
-                      <div className="flex items-center px-2 lg:px-[8px] py-3 lg:py-[18px] border-r border-[#a6a6a633] bg-[#ffffff05]">
-                        <img 
-                          src="/images/img_background.png" 
-                          alt="India flag"
-                          className="w-3 lg:w-[16px] h-2 lg:h-[10px] mr-2"
-                        />
-                        <span 
-                          className="text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#dddddd]"
-                          style={{ fontFamily: 'Lato' }}
-                        >
-                          +91
-                        </span>
-                      </div>
-                      <input
-                        type="tel"
-                        value={formData.whatsapp}
-                        onChange={(e) => handleInputChange('whatsapp', e.target.value)}
-                        className="flex-1 px-3 lg:px-[10px] py-3 lg:py-[18px] text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#dddddd] bg-transparent border-0 focus:outline-none"
-                        style={{ fontFamily: 'Lato' }}
-                      />
-                    </div>
+                    <label className="text-sm text-[#d9d9d9] mb-2 block">WhatsApp Number</label>
+                    <input
+                      type="tel"
+                      value={formData.whatsapp}
+                      onChange={(e) => handleInputChange('whatsapp', e.target.value)}
+                      className="w-full px-3 py-2 text-sm text-[#ffffffcc] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm"
+                    />
                   </div>
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label 
-                    className="block text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#d9d9d9] mb-2 lg:mb-[6px]"
-                    style={{ fontFamily: 'Lato' }}
-                  >
-                    Message or Query
-                  </label>
+                  <label className="text-sm text-[#d9d9d9] mb-2 block">Message or Query</label>
                   <TextArea
                     placeholder="Tell us about your project or ask us any query.."
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                     rows={4}
-                    className="w-full px-3 lg:px-[12px] py-2 lg:py-[12px] text-[12px] lg:text-[14px] font-normal leading-snug text-left text-[#ffffff66] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm resize-vertical"
-                    style={{ fontFamily: 'Lato' }}
+                    className="w-full px-3 py-2 text-sm text-[#ffffffcc] bg-[#ffffff0a] border border-[#ffffff0c] rounded-sm resize-y"
                   />
                 </div>
 
-                {/* Agreement Checkbox */}
-                <div className="flex items-start gap-3 lg:gap-[12px]">
-                  <div className="w-4 lg:w-[18px] h-4 lg:h-[18px] border border-[#ffffff4c] rounded-sm bg-[#ffffff0c] mt-1 flex-shrink-0"></div>
+                {/* Checkbox */}
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={formData.agreeToSMS}
+                    onChange={handleCheckboxChange}
+                    className="w-4 h-4 mt-1 accent-[#4169e1]"
+                  />
                   <div>
-                    <p 
-                      className="text-[12px] lg:text-[14px] font-medium leading-snug lg:leading-[17px] text-left capitalize text-[#ffffffcc]"
-                      style={{ fontFamily: 'Lato' }}
-                    >
+                    <p className="text-sm text-[#ffffffcc]">
                       I agree to receive SMS notifications about my consultation appointments
                     </p>
-                    <p 
-                      className="text-[10px] lg:text-[11px] font-medium leading-tight lg:leading-[14px] text-left capitalize text-[#ffffff99] mt-1"
-                      style={{ fontFamily: 'Lato' }}
-                    >
+                    <p className="text-xs text-[#ffffff99] mt-1">
                       (Message & data rates may apply. Reply STOP to opt out.)
                     </p>
                   </div>
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit */}
                 <Button
-                  onClick={handleSubmit}
-                  className="w-full px-8 lg:px-[52px] py-3 lg:py-[12px] text-base font-bold leading-tight lg:leading-[20px] text-center text-white bg-[#4169e1] rounded-lg hover:bg-[#5a7ae8] transition-all duration-200 flex items-center justify-center gap-2 lg:gap-[10px] mt-8 lg:mt-[36px]"
-                  style={{ fontFamily: 'Lato' }}
+                  type="submit"
+                  className="w-full py-3 font-bold text-white bg-[#4169e1] rounded-lg hover:bg-[#5a7ae8] transition"
                 >
-                  <span>Send Message</span>
-                  <img 
-                    src="/images/img_svg_white_a700.svg" 
-                    alt="Send"
-                    className="w-4 lg:w-[18px] h-4 lg:h-[18px]"
-                  />
+                  Send Message
                 </Button>
               </form>
             </div>
@@ -287,7 +225,7 @@ const ContactSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ContactSection
+export default ContactSection;
