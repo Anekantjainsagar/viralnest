@@ -9,6 +9,7 @@ import FeaturedProjectsSection from './FeaturedProjectsSection';
 import TechnologiesSection from './TechnologiesSection';
 import TestimonialsSection from './TestimonialsSection';
 import ContactSection from './ContactSection';
+import TeamsSection from './TeamsSection';
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
         <ServicesSection />
         <FeaturedProjectsSection />
         <TechnologiesSection />
+        <TeamsSection /> {/* <-- Added here */}
         <TestimonialsSection />
         <ContactSection />
       </main>

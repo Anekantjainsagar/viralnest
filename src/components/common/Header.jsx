@@ -7,11 +7,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: 'Home', href: '/', active: true },
-    { label: 'About', href: '/about', active: false },
-    { label: 'Services', href: '/services', active: false },
-    { label: 'Projects', href: '/projects', active: false },
-    { label: 'Blogs', href: '/blogs', active: false },
+    { label: 'Home', href: '#home', active: true },
+    { label: 'About', href: '#about', active: false },
+    { label: 'Services', href: '#services', active: false },
+    { label: 'Projects', href: '#projects', active: false },
   ];
 
   return (
@@ -39,11 +38,14 @@ const Header = () => {
                   item.active ? 'text-primary-background' : 'text-secondary-foreground'
                 }`}
                 style={{ fontFamily: 'Saira' }}
-                layout_width="auto"
-                padding="0"
-                position="static"
-                margin="0"
-                onClick={() => {}}
+                onClick={(e) => {
+                  e.preventDefault(); // stop full page reload
+                  const target = document.querySelector(item.href);
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                  setMenuOpen(false); // close mobile menu after click
+                }}
               >
                 {item.label}
               </Link>
@@ -95,11 +97,18 @@ const Header = () => {
               <Link
                 key={index}
                 href={item.href}
-                className={`text-base font-medium leading-normal capitalize transition-colors duration-200 hover:text-primary-background ${
-                  item.active ? 'text-primary-background' : 'text-gray-300'
+                className={`text-sm font-medium leading-normal capitalize transition-colors duration-200 hover:text-primary-background ${
+                  item.active ? 'text-primary-background' : 'text-secondary-foreground'
                 }`}
                 style={{ fontFamily: 'Saira' }}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault(); // stop full page reload
+                  const target = document.querySelector(item.href);
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                  setMenuOpen(false); // close mobile menu after click
+                }}
               >
                 {item.label}
               </Link>

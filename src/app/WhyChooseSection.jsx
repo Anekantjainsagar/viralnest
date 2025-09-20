@@ -25,7 +25,7 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="w-full mt-12 lg:mt-[48px]">
+    <section id="about" className="w-full mt-12 lg:mt-[48px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-[48px] items-start lg:items-center justify-between">
           {/* Left Content */}

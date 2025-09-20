@@ -19,7 +19,7 @@ const StatsSection = () => {
     {
       number: '96%',
       label: 'Brands',
-      description: 'Brands Satisfied With Our On-Time, High-Quality Results',
+      description: 'Satisfied With Us',
     },
   ];
 

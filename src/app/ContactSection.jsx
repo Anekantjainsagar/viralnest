@@ -14,7 +14,7 @@ const ContactSection = () => {
     agreeToSMS: false,
   });
 
-  const [openStep, setOpenStep] = useState(0); // default Step 01 open
+  const [openStep, setOpenStep] = useState(0);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({

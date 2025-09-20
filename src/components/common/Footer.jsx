@@ -205,7 +205,7 @@ const Footer = () => {
                   className="text-sm font-bold leading-relaxed lg:leading-[25px] text-secondary-foreground px-1"
                   style={{ fontFamily: 'Saira' }}
                 >
-                  Viral Nest Digital Marketing Agency
+                  Viral Nest
                 </span>
                 <span
                   className="text-sm font-normal leading-relaxed lg:leading-[25px] text-text-placeholder"

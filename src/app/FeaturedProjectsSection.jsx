@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import IconButton from '../components/ui/IconButton';
 import Link from '../components/ui/Link';
 
@@ -30,7 +31,7 @@ const FeaturedProjectsSection = () => {
   ];
 
   return (
-    <section className="w-full mt-16 lg:mt-[112px]">
+    <section id="projects" className="w-full mt-16 lg:mt-[112px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           className="text-[32px] sm:text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9] mb-8 lg:mb-[26px]"
@@ -43,7 +44,7 @@ const FeaturedProjectsSection = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-12 py-10"
+              className="flex flex-col lg:flex-row items-start lg:items-center gap-2 lg:gap-12 py-10"
             >
               {/* Project Info */}
               <div className="w-full lg:w-[42%]">
@@ -72,8 +73,10 @@ const FeaturedProjectsSection = () => {
               {/* Project Image + CTA */}
               <div className="w-full lg:w-[58%] flex flex-col lg:flex-row items-center lg:items-start gap-4">
                 <div className="flex justify-center w-full lg:flex-1">
-                  <div className="w-[260px] sm:w-[280px] lg:w-[340px] h-[160px] sm:h-[180px] lg:h-[218px] rounded-sm overflow-hidden">
-                    <img
+                  <div className="w-full sm:w-[280px] lg:w-[340px] h-fit sm:h-[180px] lg:h-[218px] rounded-sm overflow-hidden">
+                    <Image
+                      width={1000}
+                      height={1000}
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"

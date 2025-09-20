@@ -93,7 +93,7 @@ const ServicesSection = () => {
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
 
   return (
-    <section className="w-full bg-[#1b1e22] py-12 lg:py-[64px] mt-12 lg:mt-[54px]">
+    <section id="services" className="w-full bg-[#1b1e22] py-12 lg:py-[64px] mt-12 lg:mt-[54px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           className="text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9] mb-8 lg:mb-[42px]"
@@ -103,63 +103,61 @@ const ServicesSection = () => {
         </h2>
 
         {/* Slider container */}
+        {/* Slider container */}
         <div className="relative overflow-hidden">
           <div
             className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            style={{ transform: `translateX(-${currentSlide * (100 / itemsPerSlide)}%)` }}
           >
-            {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+            {services.map((service, index) => (
               <div
-                key={slideIndex}
-                className="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[30px]"
+                key={index}
+                className="flex-shrink-0 px-3"
+                style={{ width: `${100 / itemsPerSlide}%` }} // Responsive card width
               >
-                {services
-                  .slice(slideIndex * itemsPerSlide, slideIndex * itemsPerSlide + itemsPerSlide)
-                  .map((service, index) => (
-                    <div key={index} className="bg-[#202328] rounded-sm p-6 lg:p-[30px] h-auto">
-                      <div className="w-[60px] h-[60px] mb-6 lg:mb-[30px]">
-                        <img
-                          src={service.icon}
-                          alt={service.title}
-                          className="w-full h-full object-contain"
-                        />
+                <div className="bg-[#202328] rounded-sm p-6 lg:p-[30px] h-full flex flex-col">
+                  <div className="w-[60px] h-[60px] mb-6 lg:mb-[30px]">
+                    <img
+                      src={service.icon}
+                      alt={service.title}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+
+                  <h3
+                    className="text-[20px] lg:text-[24px] font-bold leading-tight lg:leading-[28px] text-left text-[#cccccc] mb-2 lg:mb-[10px]"
+                    style={{ fontFamily: 'Saira' }}
+                  >
+                    {service.title}
+                  </h3>
+
+                  <p
+                    className="text-[12px] lg:text-[14px] font-light leading-relaxed lg:leading-[25px] text-left text-[#cccccc] mb-4 lg:mb-[18px]"
+                    style={{ fontFamily: 'Saira' }}
+                  >
+                    {service.description}
+                  </p>
+
+                  <div className="space-y-2 lg:space-y-[8px] mt-auto">
+                    {service.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center gap-3 lg:gap-[12px]">
+                        <div className="w-2 h-2">
+                          <img
+                            src="/images/img_vector_indigo_a400_8x8.svg"
+                            alt="Feature"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <span
+                          className="text-[13px] lg:text-[15px] font-medium leading-relaxed lg:leading-[24px] text-left text-[#cccccc]"
+                          style={{ fontFamily: 'Saira' }}
+                        >
+                          {feature}
+                        </span>
                       </div>
-
-                      <h3
-                        className="text-[20px] lg:text-[24px] font-bold leading-tight lg:leading-[28px] text-left text-[#cccccc] mb-2 lg:mb-[10px]"
-                        style={{ fontFamily: 'Saira' }}
-                      >
-                        {service.title}
-                      </h3>
-
-                      <p
-                        className="text-[12px] lg:text-[14px] font-light leading-relaxed lg:leading-[25px] text-left text-[#cccccc] mb-4 lg:mb-[18px]"
-                        style={{ fontFamily: 'Saira' }}
-                      >
-                        {service.description}
-                      </p>
-
-                      <div className="space-y-2 lg:space-y-[8px]">
-                        {service.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center gap-3 lg:gap-[12px]">
-                            <div className="w-2 h-2">
-                              <img
-                                src="/images/img_vector_indigo_a400_8x8.svg"
-                                alt="Feature"
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                            <span
-                              className="text-[13px] lg:text-[15px] font-medium leading-relaxed lg:leading-[24px] text-left text-[#cccccc]"
-                              style={{ fontFamily: 'Saira' }}
-                            >
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>

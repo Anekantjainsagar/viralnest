@@ -51,25 +51,25 @@ const TestimonialsSection = () => {
 
     updateItemsPerPage();
     window.addEventListener('resize', updateItemsPerPage);
-
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
-  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
+  // totalSlides = max starting index (avoid sliding into empty space)
+  const totalSlides = testimonials.length - itemsPerPage + 1;
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalPages);
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
   };
 
   // Auto-slide every 3s
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
-  }, [totalPages]);
+  }, [totalSlides]);
 
   return (
     <section className="w-full bg-[#1b1e22] py-12 lg:py-[78px]">
@@ -87,44 +87,38 @@ const TestimonialsSection = () => {
         <div className="relative overflow-hidden">
           <div
             className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            style={{
+              transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+            }}
           >
-            {Array.from({ length: totalPages }).map((_, pageIndex) => (
+            {testimonials.map((testimonial, index) => (
               <div
-                key={pageIndex}
-                className={`w-full flex-shrink-0 grid ${
-                  itemsPerPage === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-3'
-                } gap-6 px-4`}
+                key={index}
+                className="flex-shrink-0 px-3"
+                style={{ width: `${100 / itemsPerPage}%` }} // each card takes share of row
               >
-                {testimonials
-                  .slice(pageIndex * itemsPerPage, pageIndex * itemsPerPage + itemsPerPage)
-                  .map((testimonial, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col items-center justify-center bg-[#2a2e33] rounded-xl p-6 shadow-md"
+                <div className="flex flex-col items-center justify-center bg-[#2a2e33] rounded-xl p-6 shadow-md h-full">
+                  <blockquote
+                    className="text-[16px] lg:text-[18px] font-normal leading-relaxed lg:leading-[28px] text-center capitalize text-[#bfbfbf] mb-6"
+                    style={{ fontFamily: 'Lato' }}
+                  >
+                    “{testimonial.quote}”
+                  </blockquote>
+                  <div className="text-center mt-auto">
+                    <cite
+                      className="text-[18px] lg:text-[20px] font-semibold leading-relaxed text-[#bfbfbf] not-italic block mb-1"
+                      style={{ fontFamily: 'Lato' }}
                     >
-                      <blockquote
-                        className="text-[16px] lg:text-[18px] font-normal leading-relaxed lg:leading-[28px] text-center capitalize text-[#bfbfbf] mb-6"
-                        style={{ fontFamily: 'Lato' }}
-                      >
-                        “{testimonial.quote}”
-                      </blockquote>
-                      <div className="text-center">
-                        <cite
-                          className="text-[18px] lg:text-[20px] font-semibold leading-relaxed text-[#bfbfbf] not-italic block mb-1"
-                          style={{ fontFamily: 'Lato' }}
-                        >
-                          {testimonial.author}
-                        </cite>
-                        <p
-                          className="text-[12px] lg:text-[14px] font-normal leading-tight text-[#4169e1]"
-                          style={{ fontFamily: 'Lato' }}
-                        >
-                          {testimonial.position}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                      {testimonial.author}
+                    </cite>
+                    <p
+                      className="text-[12px] lg:text-[14px] font-normal leading-tight text-[#4169e1]"
+                      style={{ fontFamily: 'Lato' }}
+                    >
+                      {testimonial.position}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -146,7 +140,7 @@ const TestimonialsSection = () => {
 
         {/* Pagination dots */}
         <div className="flex items-center justify-center gap-2 mt-8">
-          {Array.from({ length: totalPages }).map((_, index) => (
+          {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}

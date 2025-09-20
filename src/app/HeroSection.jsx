@@ -1,20 +1,20 @@
 'use client';
-import { useState } from 'react';
-import Button from '../components/ui/Button';
 import Image from 'next/image';
+import Button from '../components/ui/Button';
 
 const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
   const slides = [
-    { id: 1, active: true },
-    { id: 2, active: false },
-    { id: 3, active: false },
-    { id: 4, active: false },
+    { id: 1, activeImg: '/images/img_item_link.svg' },
+    { id: 2, activeImg: '/images/wb.png' },
+    { id: 3, activeImg: '/images/Icon.png' },
+    { id: 4, activeImg: '/images/Link.png' },
   ];
 
   return (
-    <section className="w-full bg-[linear-gradient(270deg,#1f2937_0%,#183763_50%,#000000_100%)] shadow-[0px_0px_20px_#2c2b2b] px-4 sm:px-6 lg:px-8">
+    <section
+      id="home"
+      className="w-full bg-[linear-gradient(270deg,#1f2937_0%,#183763_50%,#000000_100%)] shadow-[0px_0px_20px_#2c2b2b] px-4 sm:px-6 lg:px-8"
+    >
       <div className="w-full max-w-[1440px] mx-auto h-[120vh] md:h-[100vh] flex items-center justify-center">
         {/* Hero Content */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
@@ -64,11 +64,13 @@ const HeroSection = () => {
                 {slides.map((slide, index) => (
                   <button
                     key={slide.id}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => {}}
                     className="w-4 lg:w-[20px] h-6 lg:h-[32px] transition-opacity duration-200 hover:opacity-80"
                   >
-                    <img
-                      src={index === 0 ? '/images/img_item_link.svg' : '/images/img_item.svg'}
+                    <Image
+                      src={slide.activeImg}
+                      width={1000}
+                      height={1000}
                       alt={`Slide ${index + 1}`}
                       className="w-full h-full object-contain"
                     />
