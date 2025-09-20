@@ -1,10 +1,16 @@
 'use client';
+import emailjs from 'emailjs-com';
 import { useState } from 'react';
 import Button from '../components/ui/Button';
 import EditText from '../components/ui/EditText';
 import TextArea from '../components/ui/TextArea';
 
+const SERVICE_ID = process.env.NEXT_PUBLIC_SERVICE_ID;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_PUBLIC_KEY;
+
 const ContactSection = () => {
+  const [popup, setPopup] = useState({ visible: false, message: '', type: '' });
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -32,8 +38,45 @@ const ContactSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // TODO: connect API
+
+    const { fullName, email, phone, whatsapp, message } = formData;
+
+    if (!fullName || !email || !phone || !whatsapp || !message) {
+      setPopup({
+        visible: true,
+        message: 'Please fill all fields before submitting.',
+        type: 'error',
+      });
+      return;
+    }
+
+    const templateParams = { name: fullName, email, phone, whatsapp, message };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY).then(
+      (response) => {
+        setPopup({
+          visible: true,
+          message: 'Your message has been sent successfully!',
+          type: 'success',
+        });
+
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          whatsapp: '',
+          message: '',
+          agreeToSMS: false,
+        });
+      },
+      (err) => {
+        setPopup({
+          visible: true,
+          message: 'Oops! Something went wrong. Please try again later.',
+          type: 'error',
+        });
+      }
+    );
   };
 
   const steps = [
@@ -53,6 +96,29 @@ const ContactSection = () => {
 
   return (
     <section className="w-full mt-16 lg:mt-[106px]">
+      {/* Popup */}
+      {popup.visible && (
+        <div
+          className={`fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50`}
+          onClick={() => setPopup({ ...popup, visible: false })}
+        >
+          <div
+            className={`bg-[#1b1e22] text-white p-6 rounded-lg shadow-lg max-w-sm w-full ${
+              popup.type === 'success' ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-center text-lg">{popup.message}</p>
+            <button
+              onClick={() => setPopup({ ...popup, visible: false })}
+              className="mt-4 w-full py-2 bg-[#4169e1] rounded hover:bg-[#5a7ae8] transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-[48px]">
           {/* Left Section */}
