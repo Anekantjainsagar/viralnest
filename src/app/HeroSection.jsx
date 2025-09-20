@@ -15,11 +15,11 @@ const HeroSection = () => {
       id="home"
       className="w-full bg-[linear-gradient(270deg,#1f2937_0%,#183763_50%,#000000_100%)] shadow-[0px_0px_20px_#2c2b2b] px-4 sm:px-6 lg:px-8"
     >
-      <div className="w-full max-w-[1440px] mx-auto h-[120vh] md:h-[100vh] flex items-center justify-center">
+      <div className="w-full max-w-[1440px] mx-auto h-fit md:h-[100vh] flex items-center justify-center md:py-0 py-10">
         {/* Hero Content */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
           {/* Left Content */}
-          <div className="w-full lg:w-[46%] flex flex-col items-start">
+          <div className="w-full lg:w-[46%] flex flex-col items-start md:mt-0 mt-8 md:mb-0 mb-4">
             <h1
               className="text-[28px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold leading- lg:leading-[80px] text-left capitalize mb-2 lg:mb-6"
               style={{ fontFamily: 'Oswald' }}
@@ -50,7 +50,13 @@ const HeroSection = () => {
               layout_gap="0"
               variant="primary"
               size="large"
-              onClick={() => {}}
+              onClick={(e) => {
+                e.preventDefault(); // stop full page reload
+                const target = document.querySelector('#contact');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
             />
           </div>
 

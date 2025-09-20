@@ -124,6 +124,7 @@ const ContactSection = () => {
           {/* Left Section */}
           <div className="w-full lg:w-[42%]">
             <h2
+              id="contact"
               className="text-[36px] md:text-[48px] lg:text-[62px] font-bold text-[#d9d9d9] mb-4"
               style={{ fontFamily: 'Oswald' }}
             >
@@ -202,7 +203,7 @@ const ContactSection = () => {
                 Make a Free Consulting
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6 px-2 sm:px-6 md:px-8">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:px-6 md:px-8">
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>

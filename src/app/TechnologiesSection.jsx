@@ -27,7 +27,7 @@ const TechnologiesSection = () => {
   }, [technologies.length]);
 
   return (
-    <section className="w-full bg-[#1b1e22] py-16 lg:py-[120px] mt-32 lg:mt-[216px]">
+    <section className="w-full bg-[#1b1e22] py-16 lg:py-[120px] mt-4 lg:mt-[216px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           className="text-[18px] lg:text-[22px] font-medium leading-tight lg:leading-[35px] text-center capitalize text-[#d9d9d9] mb-12 lg:mb-[58px]"

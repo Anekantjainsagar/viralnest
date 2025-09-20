@@ -66,7 +66,14 @@ const Header = () => {
               layout_gap="0"
               variant="outline"
               size="medium"
-              onClick={() => {}}
+              onClick={(e) => {
+                e.preventDefault(); // stop full page reload
+                const target = document.querySelector('#contact');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                setMenuOpen(false); // close mobile menu after click
+              }}
             />
           </div>
 
@@ -119,7 +126,14 @@ const Header = () => {
                 text="Contact Us"
                 className="w-full px-6 py-2 text-sm font-bold leading-tight text-primary-background border border-primary-background rounded-sm shadow-[2px_4px_8px_#4169e1] bg-transparent hover:bg-primary-background hover:text-white transition-all duration-200"
                 style={{ fontFamily: 'Lato' }}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault(); // stop full page reload
+                  const target = document.querySelector('#contact');
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                  setMenuOpen(false); // close mobile menu after click
+                }}
               />
             </div>
           </div>

@@ -34,7 +34,7 @@ const FeaturedProjectsSection = () => {
     <section id="projects" className="w-full mt-16 lg:mt-[112px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2
-          className="text-[32px] sm:text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9] mb-8 lg:mb-[26px]"
+          className="text-[32px] sm:text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9] mb-2 lg:mb-[26px]"
           style={{ fontFamily: 'Oswald' }}
         >
           Featured Projects
