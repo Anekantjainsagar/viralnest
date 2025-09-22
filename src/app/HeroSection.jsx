@@ -17,11 +17,11 @@ const HeroSection = () => {
     >
       <div className="w-full max-w-[1440px] mx-auto h-fit md:h-[100vh] flex items-center justify-center md:py-0 py-10">
         {/* Hero Content */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-16">
           {/* Left Content */}
-          <div className="w-full lg:w-[46%] flex flex-col items-start md:mt-0 mt-8 md:mb-0 mb-4">
+          <div className="w-full lg:w-[46%] flex flex-col items-center md:items-start md:my-0 my-2">
             <h1
-              className="text-[28px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold leading- lg:leading-[80px] text-left capitalize mb-2 lg:mb-6"
+              className="text-[28px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-bold leading- lg:leading-[80px] text-center md:text-left capitalize mb-2 lg:mb-6"
               style={{ fontFamily: 'Oswald' }}
             >
               <span className="text-[#d9d9d9]">Where </span>
@@ -29,7 +29,7 @@ const HeroSection = () => {
             </h1>
 
             <p
-              className="text-base font-semibold leading-relaxed lg:leading-[25px] text-left text-[#bfbfbf] mb-4 lg:mb-6 w-full lg:w-[84%]"
+              className="text-base font-semibold leading-relaxed lg:leading-[25px] text-center md:text-left text-[#bfbfbf] mb-4 lg:mb-6 w-full lg:w-[84%]"
               style={{ fontFamily: 'Lato' }}
             >
               Transform your business with Viral Nest — your all-in-one growth partner. We go beyond
@@ -44,7 +44,7 @@ const HeroSection = () => {
               style={{ fontFamily: 'Oswald' }}
               fill_background_color="#4169e1"
               layout_width="auto"
-              padding="px-6 lg:px-[32px] py-2 lg:py-[8px]"
+              padding="px-6 lg:px-[32px] py-2.5 lg:py-[8px]"
               position="static"
               margin="mt-8 lg:mt-[50px]"
               layout_gap="0"
@@ -61,7 +61,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right Content - Services Visualization */}
-          <div className="w-full lg:w-[44%] flex justify-center lg:justify-end">
+          <div className="w-full lg:w-[44%] flex justify-center lg:justify-end md:mt-0 mt-10">
             <div className="relative w-full max-w-[540px] lg:max-w-[722px] px-8 lg:px-[56px]">
               <Image src="/images/SVG.png" alt="Viral Nest Image" width={1000} height={1000} />
 

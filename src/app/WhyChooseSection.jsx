@@ -45,8 +45,10 @@ const WhyChooseSection = () => {
             <div className="space-y-6 lg:space-y-[44px] mt-5">
               {features.map((feature, index) => (
                 <div key={index} className="flex gap-4 lg:gap-[24px] items-start">
-                  <div className="w-[50px] sm:w-[60px] lg:w-[98px] h-[50px] sm:h-[60px] lg:h-[98px] border border-[#ffffff33] rounded-full flex items-center justify-center flex-shrink-0 p-3 sm:p-4 lg:p-[22px]">
-                    <img
+                  <div className="w-[70px] sm:w-[60px] lg:w-[98px] h-[70px] sm:h-[60px] lg:h-[98px] border border-[#ffffff33] rounded-full flex items-center justify-center flex-shrink-0 p-3 sm:p-4 lg:p-[22px]">
+                    <Image
+                      width={1000}
+                      height={1000}
                       src={feature.icon}
                       alt={feature.title}
                       className="w-full h-full object-contain"
