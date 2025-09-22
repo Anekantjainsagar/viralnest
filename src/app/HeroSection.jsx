@@ -66,7 +66,7 @@ const HeroSection = () => {
               <Image src="/images/SVG.png" alt="Viral Nest Image" width={1000} height={1000} />
 
               {/* Navigation Dots */}
-              <div className="hidden md:block absolute right-0 lg:right-[-12px] top-[120px] lg:top-[207px] flex flex-col gap-4 lg:gap-[28px]">
+              <div className="hidden md:flex absolute right-0 lg:right-[-12px] top-[120px] lg:top-[207px] flex-col gap-4 lg:gap-[28px]">
                 {slides.map((slide, index) => (
                   <button
                     key={slide.id}
