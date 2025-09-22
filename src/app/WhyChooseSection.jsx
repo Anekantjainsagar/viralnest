@@ -27,7 +27,7 @@ const WhyChooseSection = () => {
   return (
     <section id="about" className="w-full mt-12 lg:mt-[48px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-[48px] items-start lg:items-center justify-between">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-[48px] items-start lg:items-center justify-between">
           {/* Left Content */}
           <div className="w-full lg:w-[42%]">
             <h2
@@ -88,7 +88,7 @@ const WhyChooseSection = () => {
               </div>
 
               {/* Top right decoration */}
-              <div className="absolute top-2 right-2 sm:top-4 sm:right-4 lg:top-0 lg:right-0 w-[40px] sm:w-[50px] lg:w-[80px] h-[40px] sm:h-[50px] lg:h-[80px]">
+              <div className="absolute top-0 right-0 sm:top-4 sm:right-4 lg:top-0 lg:right-0 w-[40px] sm:w-[50px] lg:w-[80px] h-[40px] sm:h-[50px] lg:h-[80px]">
                 <img
                   src="/images/img_choose_vec_btm_l_svg.svg"
                   alt="Decoration"
