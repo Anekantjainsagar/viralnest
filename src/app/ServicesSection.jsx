@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import IconButton from '../components/ui/IconButton';
 
 const ServicesSection = () => {
@@ -58,8 +58,18 @@ const ServicesSection = () => {
     },
   ];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
+  const [currentIndex, setCurrentIndex] = useState(itemsPerSlide);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const sliderRef = useRef(null);
+
+  const extendedServices = [
+    ...services.slice(-itemsPerSlide),
+    ...services,
+    ...services.slice(0, itemsPerSlide),
+  ];
+
+  const totalSlides = services.length;
 
   // Responsive itemsPerSlide
   useEffect(() => {
@@ -78,19 +88,46 @@ const ServicesSection = () => {
     return () => window.removeEventListener('resize', updateItems);
   }, []);
 
-  const totalSlides = Math.ceil(services.length / itemsPerSlide);
-
-  // Auto slide every 3000ms
+  // Auto-slide every 3s
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      nextSlide();
     }, 3000);
     return () => clearInterval(interval);
-  }, [totalSlides]);
+  });
 
-  const goToSlide = (index) => setCurrentSlide(index);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  const nextSlide = () => {
+    setCurrentIndex((prev) => prev + 1);
+    setIsTransitioning(true);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => prev - 1);
+    setIsTransitioning(true);
+  };
+
+  // Reset after transition ends
+  useEffect(() => {
+    const handleTransitionEnd = () => {
+      if (currentIndex >= totalSlides + itemsPerSlide) {
+        setIsTransitioning(false);
+        setCurrentIndex(itemsPerSlide); // jump back to start
+      } else if (currentIndex < itemsPerSlide) {
+        setIsTransitioning(false);
+        setCurrentIndex(totalSlides + (currentIndex % totalSlides));
+      }
+    };
+
+    const slider = sliderRef.current;
+    if (slider) {
+      slider.addEventListener('transitionend', handleTransitionEnd);
+    }
+    return () => {
+      if (slider) {
+        slider.removeEventListener('transitionend', handleTransitionEnd);
+      }
+    };
+  }, [currentIndex, totalSlides, itemsPerSlide]);
 
   return (
     <section id="services" className="w-full bg-[#1b1e22] py-12 lg:py-[64px] mt-12 lg:mt-[54px]">
@@ -103,17 +140,19 @@ const ServicesSection = () => {
         </h2>
 
         {/* Slider container */}
-        {/* Slider container */}
         <div className="relative overflow-hidden">
           <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * (100 / itemsPerSlide)}%)` }}
+            ref={sliderRef}
+            className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-in-out' : ''}`}
+            style={{
+              transform: `translateX(-${(currentIndex * 100) / itemsPerSlide}%)`,
+            }}
           >
-            {services.map((service, index) => (
+            {extendedServices.map((service, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 px-3"
-                style={{ width: `${100 / itemsPerSlide}%` }} // Responsive card width
+                style={{ width: `${100 / itemsPerSlide}%` }}
               >
                 <div className="bg-[#202328] rounded-sm p-6 lg:p-[30px] h-full flex flex-col">
                   <div className="w-[60px] h-[60px] mb-6 lg:mb-[30px]">
@@ -123,21 +162,18 @@ const ServicesSection = () => {
                       className="w-full h-full object-contain"
                     />
                   </div>
-
                   <h3
                     className="text-[20px] lg:text-[24px] font-bold leading-tight lg:leading-[28px] text-left text-[#cccccc] mb-2 lg:mb-[10px]"
                     style={{ fontFamily: 'Saira' }}
                   >
                     {service.title}
                   </h3>
-
                   <p
                     className="text-[12px] lg:text-[14px] font-light leading-relaxed lg:leading-[25px] text-left text-[#cccccc] mb-4 lg:mb-[18px]"
                     style={{ fontFamily: 'Saira' }}
                   >
                     {service.description}
                   </p>
-
                   <div className="space-y-2 lg:space-y-[8px] mt-auto">
                     {service.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-3 lg:gap-[12px]">
@@ -170,20 +206,6 @@ const ServicesSection = () => {
             className="w-[34px] h-[34px] p-2 lg:p-[10px] border border-[#4169e1] rounded-lg hover:bg-[#4169e1] transition-colors duration-200"
             onClick={prevSlide}
           />
-
-          {/* Dots */}
-          <div className="flex items-center gap-2 lg:gap-[12px] px-8 lg:px-[56px]">
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-sm transition-colors duration-200 ${
-                  index === currentSlide ? 'bg-[#4169e1]' : 'bg-[#999999]'
-                }`}
-              />
-            ))}
-          </div>
-
           <IconButton
             src="/images/img_border.svg"
             className="w-[34px] h-[34px] rotate-180 p-2 lg:p-[10px] border border-[#4169e1] rounded-lg hover:bg-[#4169e1] transition-colors duration-200"

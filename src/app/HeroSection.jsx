@@ -62,7 +62,7 @@ const HeroSection = () => {
 
           {/* Right Content - Services Visualization */}
           <div className="w-full lg:w-[44%] flex justify-center lg:justify-end md:mt-0 mt-10">
-            <div className="relative w-full max-w-[540px] lg:max-w-[722px] px-8 lg:px-[56px]">
+            <div className="relative w-full max-w-[540px] lg:max-w-[600px] px-8 lg:px-[56px]">
               <Image src="/images/SVG.png" alt="Viral Nest Image" width={1000} height={1000} />
 
               {/* Navigation Dots */}

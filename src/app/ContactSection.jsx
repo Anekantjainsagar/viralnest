@@ -149,7 +149,7 @@ const ContactSection = () => {
                 className="text-[16px] md:text-[18px] font-medium text-[#d9d9d9]"
                 style={{ fontFamily: 'Lato' }}
               >
-                +91 6386174003
+                +91 6204021876
               </span>
             </div>
 

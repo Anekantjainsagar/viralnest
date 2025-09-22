@@ -3,28 +3,47 @@ import { useEffect, useState } from 'react';
 
 const TechnologiesSection = () => {
   const technologies = [
-    { name: 'JavaScript', src: '/images/img_javascript.png' },
-    { name: 'Python', src: '/images/img_python.png' },
-    { name: 'React.js', src: '/images/img_reactjs.png' },
-    { name: 'Next.js', src: '/images/img_nextjs.png' },
-    { name: 'Node.js', src: '/images/img_nodejs.png' },
-    { name: 'AWS', src: '/images/img_aws.png' },
-    { name: 'Flutter', src: '/images/img_flutter.png' },
-    { name: 'Qt', src: '/images/img_qt.png' },
-    { name: 'Django', src: '/images/img_django.png' },
-    { name: 'Godot', src: '/images/img_godot.png' },
-    { name: 'GitHub', src: '/images/img_github.png' },
+    { src: '/images/companies/1.png' },
+    { src: '/images/companies/2.jpg' },
+    { src: '/images/companies/3.png' },
+    { src: '/images/companies/4.jpg' },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerView = 3; // show 3 items at a time
+  const [currentIndex, setCurrentIndex] = useState(itemsPerView);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
-  // Auto-scroll every 3s
+  // Clone list for infinite scroll
+  const clonedList = [
+    ...technologies.slice(-itemsPerView),
+    ...technologies,
+    ...technologies.slice(0, itemsPerView),
+  ];
+
+  // Auto-scroll
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1 >= technologies.length ? 0 : prev + 1));
+      setCurrentIndex((prev) => prev + 1);
     }, 3000);
     return () => clearInterval(interval);
-  }, [technologies.length]);
+  }, []);
+
+  // Reset transition when hitting cloned edges
+  useEffect(() => {
+    if (currentIndex === clonedList.length - itemsPerView) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(itemsPerView);
+      }, 700);
+    } else if (currentIndex === 0) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(clonedList.length - 2 * itemsPerView);
+      }, 700);
+    } else {
+      setIsTransitioning(true);
+    }
+  }, [currentIndex, clonedList.length]);
 
   return (
     <section className="w-full bg-[#1b1e22] py-16 lg:py-[120px] mt-4 lg:mt-[216px]">
@@ -36,44 +55,31 @@ const TechnologiesSection = () => {
           We Work With
         </h2>
 
-        {/* Slider Container */}
+        {/* Slider */}
         <div className="overflow-hidden relative">
           <div
-            className="flex transition-transform duration-700 ease-in-out"
+            className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-in-out' : ''}`}
             style={{
-              transform: `translateX(-${currentIndex * (100 / 8)}%)`,
-              width: `${(technologies.length / 8) * 100}%`,
+              transform: `translateX(-${(currentIndex * 100) / clonedList.length}%)`,
+              width: `${clonedList.length * (100 / itemsPerView)}%`,
             }}
           >
-            {technologies.map((tech, index) => (
+            {clonedList.map((tech, index) => (
               <div
                 key={index}
-                className="w-1/8 flex-shrink-0 flex justify-center"
-                style={{ flex: '0 0 12.5%' }} // 100 / 8 = 12.5%
+                className="flex-shrink-0 flex justify-center px-4"
+                style={{ width: `${100 / itemsPerView}%` }}
               >
                 <div className="w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] border border-[#2730359e] p-3 lg:p-[16px] flex items-center justify-center hover:border-[#4169e1] transition-colors duration-200">
                   <img
                     src={tech.src}
-                    alt={tech.name}
+                    alt={`Company-${index}`}
                     className="w-[52px] lg:w-[68px] h-[52px] lg:h-[68px] object-contain"
                   />
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Pagination Dots */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          {Array.from({ length: technologies.length - 7 }).map((_, index) => (
-            <span
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full cursor-pointer transition-colors duration-300 ${
-                currentIndex === index ? 'bg-[#4169e1]' : 'bg-[#999999]'
-              }`}
-            />
-          ))}
         </div>
       </div>
     </section>
