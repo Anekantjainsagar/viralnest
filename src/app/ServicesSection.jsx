@@ -6,54 +6,80 @@ const ServicesSection = () => {
   const services = [
     {
       icon: '/images/img_svg_indigo_a400_60x60.svg',
-      title: 'SaaS Development',
+      title: 'Social Media Marketing',
       description:
-        'Build scalable software-as-a-service solutions tailored to your business needs. We develop cloud-based applications with secure multi-tenancy, subscription management, and seamless third-party integrations.',
+        'Transform social channels into revenue-generating, loyalty-building engines with campaigns that capture attention and drive action.',
       features: [
-        'Multi-tenant Architecture',
-        'Subscription Systems',
-        'API Development',
-        'Integration Services',
-        'Analytics Dashboard',
+        'Viral Content',
+        'Platform-Specific Strategy',
+        'Audience Engagement',
+        'Influencer Collaborations',
+        'Real-Time Analytics',
       ],
     },
     {
       icon: '/images/img_svg_60x60.svg',
+      title: 'Branding & Design',
+      description:
+        'Define a brand narrative and position that ensures instant recognition, trust, and commercial relevance, while crafting visual experiences that enhance conversions and leave a lasting impression.',
+      features: [
+        'UI/UX Design',
+        'Storytelling Strategy',
+        'Market Positioning',
+        'Logo Identity',
+        'Brand Guidelines',
+      ],
+    },
+    {
+      icon: '/images/img_svg_1.svg',
+      title: 'Lead Generation',
+      description:
+        'We build content systems that turn your brand into a magnet for high-intent leads, effectively converting your audience into qualified customers.',
+      features: [
+        'Content Funnels that Convert',
+        'SEO-Driven Leads',
+        'Personal Brand Magnetism',
+        'Community Building',
+        'Social Engagement Conversion',
+      ],
+    },
+    {
+      icon: '/images/img_svg_indigo_a400_60x60.svg',
+      title: 'Web Design & Development',
+      description:
+        'Transform your digital presence with our end-to-end web solutions. Our experts combine stunning design with powerful development to create fast, scalable, and visually impressive websites.',
+      features: [
+        'Custom Website Solutions',
+        'E-commerce & Web Applications',
+        'Responsive UI/UX Design',
+        'SEO & Performance Optimization',
+        'Brand-focused Development',
+      ],
+    },
+    {
+      icon: '/images/img_svg_60x60.svg',
+      title: 'Growth Advertising',
+      description:
+        "We amplify your brand's reach and accelerate growth using targeted paid ads and strategic partnerships. Our campaigns are designed for maximum ROI, converting clicks into loyal customers.",
+      features: [
+        'Paid Social Campaigns',
+        'Search Engine Marketing (SEM)',
+        'Influencer & Brand Collaborations',
+        'Ad Creative & Copywriting',
+        'Performance Analytics & ROI Tracking',
+      ],
+    },
+    {
+      icon: '/images/img_svg_1.svg',
       title: 'Mobile App Development',
       description:
-        'Bring your app ideas to life with our comprehensive mobile development expertise. We craft intuitive, high-performance applications using Flutter and React Native, ensuring seamless user experiences across iOS and Android platforms.',
+        'Bring your app ideas to life with our comprehensive mobile development expertise. We craft intuitive, high-performance applications using Flutter and React Native.',
       features: [
         'Cross-platform Development',
         'Native App Solutions',
         'App Store Optimization',
         'UI/UX Implementation',
         'App Security & Testing',
-      ],
-    },
-    {
-      icon: '/images/img_svg_1.svg',
-      title: 'AI Integration',
-      description:
-        'Enhance your applications with AI capabilities. We integrate basic AI functionalities like chatbots, image recognition, and voice processing using established APIs and frameworks to add smart features to your existing systems.',
-      features: [
-        'ChatGPT Integration',
-        'Computer Vision',
-        'Voice Recognition',
-        'Custom Chatbots',
-        'API Implementation',
-      ],
-    },
-    {
-      icon: '/images/img_svg_indigo_a400_60x60.svg',
-      title: 'Digital Marketing',
-      description:
-        'Tailored strategies to help your business thrive online. We craft performance-focused campaigns that boost visibility, drive engagement, and convert leads into loyal customers.',
-      features: [
-        'Social Media Marketing',
-        'SEO & Content Strategy',
-        'Paid Ads & PPC Campaigns',
-        'Email & Automation',
-        'Analytics & Reporting',
       ],
     },
   ];

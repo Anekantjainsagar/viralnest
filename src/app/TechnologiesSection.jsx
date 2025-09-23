@@ -4,23 +4,25 @@ import { useEffect, useState } from 'react';
 const TechnologiesSection = () => {
   const technologies = [
     { src: '/images/companies/1.png' },
-    { src: '/images/companies/2.jpg' },
+    { src: '/images/companies/2.png' },
     { src: '/images/companies/3.png' },
-    { src: '/images/companies/4.jpg' },
+    { src: '/images/companies/4.png' },
+    { src: '/images/companies/5.png' },
+    { src: '/images/companies/6.png' },
   ];
 
-  const itemsPerView = 3; // show 3 items at a time
+  const itemsPerView = 3;
   const [currentIndex, setCurrentIndex] = useState(itemsPerView);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
-  // Clone list for infinite scroll
+  // Clone list for infinite loop
   const clonedList = [
     ...technologies.slice(-itemsPerView),
     ...technologies,
     ...technologies.slice(0, itemsPerView),
   ];
 
-  // Auto-scroll
+  // Auto scroll
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
@@ -28,7 +30,7 @@ const TechnologiesSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Reset transition when hitting cloned edges
+  // Reset to real slides when hitting edges
   useEffect(() => {
     if (currentIndex === clonedList.length - itemsPerView) {
       setTimeout(() => {
@@ -45,6 +47,10 @@ const TechnologiesSection = () => {
     }
   }, [currentIndex, clonedList.length]);
 
+  // Calculate the translate percentage - each step moves by the width of one item
+  const itemWidth = 100 / clonedList.length; // Each item takes this % of container
+  const translateX = -(currentIndex * itemWidth);
+
   return (
     <section className="w-full bg-[#1b1e22] py-16 lg:py-[120px] mt-4 lg:mt-[216px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,20 +61,23 @@ const TechnologiesSection = () => {
           We Work With
         </h2>
 
-        {/* Slider */}
-        <div className="overflow-hidden relative">
+        {/* Slider Container */}
+        <div className="overflow-hidden relative w-full">
           <div
             className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-in-out' : ''}`}
             style={{
-              transform: `translateX(-${(currentIndex * 100) / clonedList.length}%)`,
+              transform: `translateX(${translateX}%)`,
               width: `${clonedList.length * (100 / itemsPerView)}%`,
             }}
           >
             {clonedList.map((tech, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex justify-center px-4"
-                style={{ width: `${100 / itemsPerView}%` }}
+                className="flex justify-center items-center"
+                style={{
+                  width: `${100 / clonedList.length}%`,
+                  flexShrink: 0,
+                }}
               >
                 <div className="w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] border border-[#2730359e] p-3 lg:p-[16px] flex items-center justify-center hover:border-[#4169e1] transition-colors duration-200">
                   <img

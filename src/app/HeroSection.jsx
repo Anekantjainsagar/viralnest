@@ -25,7 +25,8 @@ const HeroSection = () => {
               style={{ fontFamily: 'Oswald' }}
             >
               <span className="text-[#d9d9d9]">Where </span>
-              <span className="text-[#4169e1]">Brands Fly High at the Best</span>
+              <span className="text-[#4169e1]">Brands Fly High</span>
+              <span className="text-[#d9d9d9]"> at the Best</span>
             </h1>
 
             <p
