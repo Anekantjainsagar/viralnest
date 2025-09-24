@@ -76,6 +76,7 @@ const TestimonialsSection = () => {
       <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2
+            id="testimonials"
             className="text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9]"
             style={{ fontFamily: 'Oswald' }}
           >

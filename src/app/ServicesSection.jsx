@@ -156,11 +156,12 @@ const ServicesSection = () => {
   }, [currentIndex, totalSlides, itemsPerSlide]);
 
   return (
-    <section id="services" className="w-full bg-[#1b1e22] py-12 lg:py-[64px] mt-12 lg:mt-[54px]">
+    <section className="w-full bg-[#1b1e22] py-12 lg:py-[64px] mt-12 lg:mt-[54px]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           className="text-[40px] lg:text-[60px] font-bold leading-tight lg:leading-[89px] text-center text-[#d9d9d9] mb-8 lg:mb-[42px]"
           style={{ fontFamily: 'Oswald' }}
+          id="services"
         >
           Our Services
         </h2>

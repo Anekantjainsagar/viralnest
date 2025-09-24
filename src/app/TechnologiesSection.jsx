@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const TechnologiesSection = () => {
@@ -79,11 +80,13 @@ const TechnologiesSection = () => {
                   flexShrink: 0,
                 }}
               >
-                <div className="w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] border border-[#2730359e] p-3 lg:p-[16px] flex items-center justify-center hover:border-[#4169e1] transition-colors duration-200">
-                  <img
+                <div className="w-[120px] h-[120px] flex items-center justify-center bg-[#dedede] rounded-xl shadow-md border border-[#2730359e] hover:border-[#4169e1] transition">
+                  <Image
+                    width={1000}
+                    height={1000}
                     src={tech.src}
                     alt={`Company-${index}`}
-                    className="w-[52px] lg:w-[68px] h-[52px] lg:h-[68px] object-contain"
+                    className="w-[80%] h-[80%] object-contain"
                   />
                 </div>
               </div>

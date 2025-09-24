@@ -1,13 +1,30 @@
 'use client';
 import Image from 'next/image';
 import Button from '../components/ui/Button';
+import Link from 'next/link';
 
 const HeroSection = () => {
-  const slides = [
-    { id: 1, activeImg: '/images/img_item_link.svg' },
-    { id: 2, activeImg: '/images/wb.png' },
-    { id: 3, activeImg: '/images/Icon.png' },
-    { id: 4, activeImg: '/images/Link.png' },
+  const contactLinks = [
+    {
+      src: '/images/img_item_link_blue_gray_100.svg', // Email icon
+      alt: 'Email',
+      href: 'https://wa.me/916204021876',
+    },
+    {
+      src: '/images/img_vector_blue_gray_100.svg', // WhatsApp icon
+      alt: 'WhatsApp',
+      href: 'mailto:kumarshubham@viralnest.co',
+    },
+    {
+      src: '/images/img_item_link_28x28.svg', // Instagram icon
+      alt: 'Instagram',
+      href: 'https://www.linkedin.com/company/theviralnest/',
+    },
+    {
+      src: '/images/img_item_link_blue_gray_100_28x28.svg', // LinkedIn icon
+      alt: 'LinkedIn',
+      href: 'https://www.instagram.com/theviralnest.co/',
+    },
   ];
 
   return (
@@ -68,20 +85,16 @@ const HeroSection = () => {
 
               {/* Navigation Dots */}
               <div className="hidden md:flex absolute right-0 lg:right-[-12px] top-[120px] lg:top-[207px] flex-col gap-4 lg:gap-[28px]">
-                {slides.map((slide, index) => (
-                  <button
-                    key={slide.id}
-                    onClick={() => {}}
-                    className="w-4 lg:w-[20px] h-6 lg:h-[32px] transition-opacity duration-200 hover:opacity-80"
-                  >
+                {contactLinks.map((icon, index) => (
+                  <Link key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
                     <Image
-                      src={slide.activeImg}
-                      width={1000}
-                      height={1000}
-                      alt={`Slide ${index + 1}`}
-                      className="w-full h-full object-contain"
+                      src={icon.src}
+                      alt={icon.alt}
+                      width={28}
+                      height={28}
+                      className="w-6 h-6 p-1 opacity-80 hover:opacity-100 rounded-sm transition-colors duration-200"
                     />
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
