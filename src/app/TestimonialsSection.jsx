@@ -9,33 +9,27 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       quote:
-        'Viral Nest completely transformed our social media presence. In just 4 months, our Instagram engagement increased by 180% and we gained over 5,000 quality followers.',
-      author: 'Sarah Chen',
-      position: 'Marketing Director, EcoLiving Products',
+        'Viral Nest completely changed our online game. They handled our content and social media perfectly, helping Mellow Luxury grow organically from zero online presence to real customer engagement. The team understood our premium incense brand and created content that truly represents us. Professional, reliable, and results-driven. Highly recommend Viral Nest for anyone serious about building their brand online!',
+      author: 'Ansh Gupta',
+      position: 'Founder, Mellow Luxury',
     },
     {
       quote:
-        'After struggling with page 3 rankings for months, Viral Nest got us to the first page within 6 months. Our organic traffic doubled and leads actually convert.',
-      author: 'Rajesh Patel',
-      position: 'Founder, TechSolutions India',
+        "Viral Nest transformed my Instagram in just 3 months. My posts went from getting a few likes to millions of views, and my sales doubled! The team understood my brand and made everything simple. They don't just promise results – they actually deliver them. If you want real growth, go with Viral Nest. Best decision I made for my business!",
+      author: 'Prashant Maurya',
+      position: 'Founder, VMbecauseofyou',
     },
     {
       quote:
-        "Viral Nest's paid advertising campaigns delivered exactly what we needed—qualified leads at a lower cost. Our ROI improved by 250%.",
-      author: 'Jennifer Martinez',
-      position: 'VP Marketing, B2B Software Co.',
+        'Viral Nest delivered exactly what we needed for Campus Binge. They built our entire website from scratch – both frontend and backend – and made it look professional and function perfectly. Their technical expertise and attention to detail turned our vision into reality without any hassle. The team was responsive, delivered on time, and the website performs flawlessly.',
+      author: 'Rishitabh Thapliyal',
+      position: 'Founder, Campus Binge',
     },
     {
       quote:
-        'Working with Viral Nest was seamless. Their creative team always delivers campaigns that exceed expectations.',
-      author: 'Michael Brown',
-      position: 'CEO, RetailWave',
-    },
-    {
-      quote:
-        'Viral Nest is more than just a marketing partner, they feel like part of our team. Communication is smooth and results are consistent.',
-      author: 'Emily Davis',
-      position: 'Head of Growth, StartupHub',
+        'Viral Nest built our entire website for Puzzles Living from scratch and it turned out amazing! They also manage our LinkedIn company page, which helped us establish a professional online presence. The website is user-friendly, professional, and perfectly showcases our PG services in Bangalore. The team was responsive, understood our requirements, and delivered exactly what we needed.',
+      author: 'Devansh',
+      position: 'Co-founder, Puzzles Living',
     },
   ];
 
@@ -54,7 +48,6 @@ const TestimonialsSection = () => {
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
-  // totalSlides = max starting index (avoid sliding into empty space)
   const totalSlides = testimonials.length - itemsPerPage + 1;
 
   const nextSlide = () => {
@@ -65,7 +58,6 @@ const TestimonialsSection = () => {
     setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
   };
 
-  // Auto-slide every 3s
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
@@ -96,24 +88,24 @@ const TestimonialsSection = () => {
               <div
                 key={index}
                 className="flex-shrink-0 px-3"
-                style={{ width: `${100 / itemsPerPage}%` }} // each card takes share of row
+                style={{ width: `${100 / itemsPerPage}%` }}
               >
                 <div className="flex flex-col items-center justify-center bg-[#2a2e33] rounded-xl p-6 shadow-md h-full">
                   <blockquote
-                    className="text-[16px] lg:text-[18px] font-normal leading-relaxed lg:leading-[28px] text-center capitalize text-[#bfbfbf] mb-6"
+                    className="text-[16px] lg:text-[18px] font-normal leading-relaxed lg:leading-[28px] text-center text-[#bfbfbf] mb-6"
                     style={{ fontFamily: 'Lato' }}
                   >
                     “{testimonial.quote}”
                   </blockquote>
                   <div className="text-center mt-auto">
                     <cite
-                      className="text-[18px] lg:text-[20px] font-semibold leading-relaxed text-[#bfbfbf] not-italic block mb-1"
+                      className="text-[18px] lg:text-[20px] font-semibold text-[#bfbfbf] not-italic block mb-1"
                       style={{ fontFamily: 'Lato' }}
                     >
                       {testimonial.author}
                     </cite>
                     <p
-                      className="text-[12px] lg:text-[14px] font-normal leading-tight text-[#4169e1]"
+                      className="text-[12px] lg:text-[14px] text-[#4169e1]"
                       style={{ fontFamily: 'Lato' }}
                     >
                       {testimonial.position}
