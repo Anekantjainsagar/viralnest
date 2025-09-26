@@ -49,6 +49,7 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.6.0",
     "recharts": "^2.15.2",
     "tailwind-merge": "^3.3.1"
   },

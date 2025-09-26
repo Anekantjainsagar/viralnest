@@ -2,28 +2,43 @@
 import Image from 'next/image';
 import Button from '../components/ui/Button';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 const HeroSection = () => {
+  const handleEmailClick = async (email) => {
+    try {
+      await navigator.clipboard.writeText(email);
+      toast.success('Email copied!');
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, '_blank');
+    } catch (err) {
+      toast.error('Failed to copy email!');
+    }
+  };
+
   const contactLinks = [
     {
       src: '/images/img_item_link_blue_gray_100.svg', // Email icon
       alt: 'Email',
       href: 'https://wa.me/916204021876',
+      email: false,
     },
     {
       src: '/images/img_vector_blue_gray_100.svg', // WhatsApp icon
       alt: 'WhatsApp',
-      href: 'mailto:kumarshubham@viralnest.co',
+      href: 'kumarshubham@viralnest.co',
+      email: true,
     },
     {
       src: '/images/img_item_link_28x28.svg', // Instagram icon
       alt: 'Instagram',
       href: 'https://www.linkedin.com/company/theviralnest/',
+      email: false,
     },
     {
       src: '/images/img_item_link_blue_gray_100_28x28.svg', // LinkedIn icon
       alt: 'LinkedIn',
       href: 'https://www.instagram.com/theviralnest.co/',
+      email: false,
     },
   ];
 
@@ -80,22 +95,39 @@ const HeroSection = () => {
 
           {/* Right Content - Services Visualization */}
           <div className="w-full lg:w-[44%] flex justify-center lg:justify-end md:mt-0 mt-10">
-            <div className="relative w-full max-w-[540px] lg:max-w-[600px] px-8 lg:px-[56px]">
+            <div className="relative w-full max-w-[540px] lg:max-w-[550px] px-8 lg:px-[56px]">
               <Image src="/images/SVG.png" alt="Viral Nest Image" width={1000} height={1000} />
 
               {/* Navigation Dots */}
               <div className="hidden md:flex absolute right-0 lg:right-[-12px] top-[120px] lg:top-[207px] flex-col gap-4 lg:gap-[28px]">
-                {contactLinks.map((icon, index) => (
-                  <Link key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
-                    <Image
-                      src={icon.src}
-                      alt={icon.alt}
-                      width={28}
-                      height={28}
-                      className="w-6 h-6 p-1 opacity-80 hover:opacity-100 rounded-sm transition-colors duration-200"
-                    />
-                  </Link>
-                ))}
+                {contactLinks.map((icon, index) =>
+                  !icon?.email ? (
+                    <Link key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        src={icon.src}
+                        alt={icon.alt}
+                        width={28}
+                        height={28}
+                        className="w-6 h-6 p-1 opacity-80 hover:opacity-100 rounded-sm transition-colors duration-200"
+                      />
+                    </Link>
+                  ) : (
+                    <div
+                      onClick={() => handleEmailClick(icon?.href)}
+                      key={index}
+                      className="cursor-pointer"
+                    >
+                      {' '}
+                      <Image
+                        src={icon.src}
+                        alt={icon.alt}
+                        width={28}
+                        height={28}
+                        className="w-6 h-6 p-1 opacity-80 hover:opacity-100 rounded-sm transition-colors duration-200"
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>

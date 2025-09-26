@@ -3,6 +3,7 @@ import EditText from '../ui/EditText';
 import Link from '../ui/Link';
 import IconButton from '../ui/IconButton';
 import Ul from '../ui/Ul';
+import toast from 'react-hot-toast';
 
 const Footer = () => {
   const contactInfo = {
@@ -21,6 +22,16 @@ const Footer = () => {
     'Mobile App Development',
   ];
 
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText(contactInfo.email);
+      toast.success('Email copied!');
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${contactInfo.email}`, '_blank');
+    } catch (err) {
+      toast.error('Failed to copy email!');
+    }
+  };
+
   const companyLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
@@ -33,7 +44,7 @@ const Footer = () => {
     {
       src: '/images/img_vector_blue_gray_100.svg',
       alt: 'WhatsApp',
-      href: `mailto:${contactInfo.email}`, // Open mail client
+      action: handleEmailClick, // custom click for email
     },
     {
       src: '/images/img_item_link_blue_gray_100.svg',
@@ -171,15 +182,25 @@ const Footer = () => {
 
               {/* Social Icons */}
               <div className="flex items-center space-x-3">
-                {socialIcons.map((icon, index) => (
-                  <Link key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
-                    <IconButton
-                      src={icon.src}
-                      alt={icon.alt}
-                      className="w-7 h-7 p-1 bg-secondary-dark rounded-sm hover:bg-primary-background transition-colors duration-200"
-                    />
-                  </Link>
-                ))}
+                {socialIcons.map((icon, index) =>
+                  icon.action ? (
+                    <button key={index} onClick={icon.action}>
+                      <IconButton
+                        src={icon.src}
+                        alt={icon.alt}
+                        className="w-7 h-7 p-1 bg-secondary-dark rounded-sm hover:bg-primary-background transition-colors duration-200"
+                      />
+                    </button>
+                  ) : (
+                    <Link key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
+                      <IconButton
+                        src={icon.src}
+                        alt={icon.alt}
+                        className="w-7 h-7 p-1 bg-secondary-dark rounded-sm hover:bg-primary-background transition-colors duration-200"
+                      />
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           </div>

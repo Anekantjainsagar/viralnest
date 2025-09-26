@@ -8,8 +8,8 @@ const TechnologiesSection = () => {
     { src: '/images/companies/2.png' },
     { src: '/images/companies/3.png' },
     { src: '/images/companies/4.png' },
-    { src: '/images/companies/Image 5.png' },
     { src: '/images/companies/6.png' },
+    { src: '/images/companies/Image 5.png' },
   ];
 
   const itemsPerView = 3;
