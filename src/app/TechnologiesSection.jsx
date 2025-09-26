@@ -6,7 +6,7 @@ const TechnologiesSection = () => {
   const technologies = [
     { src: '/images/companies/1.png' },
     { src: '/images/companies/2.png' },
-    { src: '/images/companies/3.png' },
+    { src: '/images/companies/IMG_0255.PNG' },
     { src: '/images/companies/4.png' },
     { src: '/images/5.png' },
     { src: '/images/companies/6.png' },
