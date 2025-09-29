@@ -88,7 +88,11 @@ const Footer = () => {
               <p className="mb-6 text-base text-text-muted" style={{ fontFamily: 'Lato' }}>
                 kumarshubham@viralnest.co
               </p>
-
+              
+              {/* Address */}
+              <p className="mb-6 text-base text-text-muted" style={{ fontFamily: 'Lato' }}>
+                Bengaluru, Karnataka
+              </p>
               <h4
                 className="text-base font-medium text-secondary-foreground mb-3"
                 style={{ fontFamily: 'Saira' }}
